@@ -1,0 +1,111 @@
+.short {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    background: white;
+    border-right: 1px solid rgb(175, 175, 175);
+    box-sizing: border-box;
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 30px;
+        i {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            color: @icons;
+        }
+    }
+    form {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        padding: 2px;
+        box-sizing: border-box;
+        input {
+            width: 100%;
+            padding: 2px 50px 2px 5px;
+            font-style: italic;
+            outline: none; 
+        }
+        .actions {
+            position: absolute;
+            right: 10px;
+            i {
+                color: @icons;
+                font-size: 0.8125rem;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+    .orders-list {
+        width: 100%;
+        max-height: 610px;
+        min-height: 600px;
+        overflow: scroll;
+        overflow-x: hidden;
+        .item {
+            display: flex;
+            height: 100px;
+            padding: 15px 10px;
+            border-bottom: 1px solid rgb(175, 175, 175);
+            box-sizing: border-box;
+            p {
+                margin-bottom: 5px;
+            }
+            .basic {
+                width: 80%;
+                h2 {
+                    margin-bottom: 7px;
+                }
+            }
+            .time {
+                p {
+                    float: right;
+                    text-align: right;
+                }
+                p:first-of-type {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                }
+                .in-time {
+                    color: @time;
+                }
+                .urgent {
+                    color: @urgent;
+                }
+            }
+            &:last-of-type {
+                border-bottom: none;
+            }
+            &:hover {
+                background: @chosen;
+            }
+        }
+    }
+    footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        background-color: @footer;
+        border-right: 1px solid rgb(175, 175, 175);
+        box-sizing: border-box;
+        i {
+            font-size: 0.8125rem;
+            margin-left: 30px;
+            color: gray;
+            cursor: pointer;
+            &:last-of-type {
+                margin-right: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,364 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+}
+body {
+  display: flex;
+  align-items: center;
+  background: #ababf3;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+p,
+li,
+input,
+table {
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: gray;
+}
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+p {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+a {
+  text-decoration: none;
+}
+.main {
+  display: flex;
+  width: 1200px;
+  min-width: 800px;
+  background: red;
+  margin: auto;
+  box-shadow: 0 0 40px gray;
+}
+.message {
+  width: 225px;
+  height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 0.8125rem;
+  border-radius: 10px;
+  outline: none;
+  resize: none;
+}
+::placeholder {
+  opacity: 1;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8125rem;
+}
+:-ms-input-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8125rem;
+}
+::-ms-input-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8125rem;
+}
+.full {
+  width: calc(100% - 300px);
+}
+.full header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  background-color: #e0ecff;
+  border-bottom: 1px solid #afafaf;
+  box-sizing: border-box;
+}
+.full .order {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 215px;
+  background-color: #e0ecff;
+  border-bottom: 2px solid #afafaf;
+  padding: 25px 30px 0 30px;
+  box-sizing: border-box;
+}
+.full .order .info {
+  width: 50%;
+}
+.full .order .info h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+.full .order .info li {
+  margin-bottom: 5px;
+}
+.full .order .info li:last-of-type {
+  margin-bottom: 30px;
+}
+.full .order .info .choice {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 7px;
+}
+.full .order .info .choice .icon-choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50%;
+  border: 1px solid #2e2399;
+  box-sizing: border-box;
+  margin-right: 30px;
+  cursor: pointer;
+}
+.full .order .info .choice .icon-choice i {
+  color: #2e2399;
+}
+.full .order .info .choice .icon-choice:hover {
+  background-color: #2e2399;
+}
+.full .order .info .choice .icon-choice:hover i {
+  color: white;
+}
+.full .order .info .choice .icon-choice:hover::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #2e2399;
+}
+.full .order .price {
+  width: 50%;
+}
+.full .order .price p {
+  float: right;
+  clear: right;
+}
+.full .order .price p:first-of-type {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.full .order .price p:last-of-type {
+  font-size: 0.7rem;
+}
+.full .addition {
+  width: 100%;
+  height: 180px;
+  background-color: white;
+  padding: 15px 10px;
+  border-bottom: 2px solid #afafaf;
+  box-sizing: border-box;
+}
+.full .addition h2 {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.full .addition ul {
+  display: inline-block;
+  margin: 10px 0 10px 10px;
+}
+.full .addition ul:first-of-type {
+  text-align: right;
+  margin-left: 20%;
+}
+.full .items {
+  width: 100%;
+  min-height: calc(100% - 465px);
+  background-color: #f4f4f4;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+.full .items h2 {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.full .items table {
+  width: 100%;
+  border-top: 1px solid gray;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+.full .items table tr {
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 0.8rem;
+}
+.full .items table tr th {
+  background-color: linear-gradient(to bottom, #e2e2e2, #838282);
+  font-weight: normal;
+  padding: 3px;
+}
+.full .items table tr td {
+  background-color: white;
+}
+.full .items table tr td h3 {
+  font-size: 0.8rem;
+}
+.full .items table tr .product-head,
+.full .items table tr .product {
+  text-align: left;
+  padding-left: 10px;
+}
+.full .items table tr .price-head,
+.full .items table tr .price {
+  text-align: center;
+}
+.full .items table tr .quantity-head,
+.full .items table tr .quantity {
+  text-align: right;
+}
+.full .items table tr .total-head,
+.full .items table tr .total {
+  text-align: right;
+  padding-right: 10px;
+}
+.full footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: #10052d;
+}
+.full footer i {
+  font-size: 0.8125rem;
+  color: gray;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.short {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  background: white;
+  border-right: 1px solid #afafaf;
+  box-sizing: border-box;
+}
+.short header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.short header i {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: #2e2399;
+}
+.short form {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.short form input {
+  width: 100%;
+  padding: 2px 50px 2px 5px;
+  font-style: italic;
+  outline: none;
+}
+.short form .actions {
+  position: absolute;
+  right: 10px;
+}
+.short form .actions i {
+  color: #2e2399;
+  font-size: 0.8125rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.short .orders-list {
+  width: 100%;
+  max-height: 610px;
+  min-height: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.short .orders-list .item {
+  display: flex;
+  height: 100px;
+  padding: 15px 10px;
+  border-bottom: 1px solid #afafaf;
+  box-sizing: border-box;
+}
+.short .orders-list .item p {
+  margin-bottom: 5px;
+}
+.short .orders-list .item .basic {
+  width: 80%;
+}
+.short .orders-list .item .basic h2 {
+  margin-bottom: 7px;
+}
+.short .orders-list .item .time p {
+  float: right;
+  text-align: right;
+}
+.short .orders-list .item .time p:first-of-type {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.short .orders-list .item .time .in-time {
+  color: #01b81c;
+}
+.short .orders-list .item .time .urgent {
+  color: #af3700;
+}
+.short .orders-list .item:last-of-type {
+  border-bottom: none;
+}
+.short .orders-list .item:hover {
+  background: #e0ecff;
+}
+.short footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: #10052d;
+  border-right: 1px solid #afafaf;
+  box-sizing: border-box;
+}
+.short footer i {
+  font-size: 0.8125rem;
+  margin-left: 30px;
+  color: gray;
+  cursor: pointer;
+}
+.short footer i:last-of-type {
+  margin-right: 10px;
+}

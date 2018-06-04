@@ -1,0 +1,167 @@
+.full {
+    width: calc(~"100% - 300px");
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 30px;
+        background-color: @chosen;
+        border-bottom: 1px solid rgb(175, 175, 175);
+        box-sizing: border-box;
+    }
+    .order {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        min-height: 215px;
+        background-color: @chosen;
+        border-bottom: 2px solid rgb(175, 175, 175);
+        padding: 25px 30px 0 30px;
+        box-sizing: border-box;
+        .info {
+            width: 50%;
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 16px;
+            }
+            li {
+                margin-bottom: 5px;
+                &:last-of-type {
+                    margin-bottom: 30px;
+                }
+            }
+            .choice {
+                display: flex;
+                justify-content: flex-start;
+                padding-bottom: 7px;
+                .icon-choice {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50% 50%;
+                    border: 1px solid @icons;
+                    box-sizing: border-box;
+                    margin-right: 30px;
+                    cursor: pointer;
+                    i {
+                        color: @icons;
+                    }
+                    &:hover {
+                        background-color: @icons;
+                        i {
+                            color: white;
+                        }
+                        &::after {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            bottom: -10px;
+                            left: 0;
+                            width: 100%;
+                            height: 2px;
+                            background-color: @icons;
+                        }
+                    }
+                }
+            }
+        }
+        .price {
+            width: 50%;
+            p {
+                float: right;
+                clear: right;
+                &:first-of-type {
+                    font-size: 1.2rem;
+                    line-height: 1;
+                }
+                &:last-of-type {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+    .addition {
+        width: 100%;
+        height: 180px;
+        background-color: white;
+        padding: 15px 10px;
+        border-bottom: 2px solid rgb(175, 175, 175);
+        box-sizing: border-box;
+        h2 {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        ul {
+            display: inline-block;
+            margin: 10px 0 10px 10px;
+            &:first-of-type {
+                text-align: right;
+                margin-left: 20%;
+            }
+        }
+    }
+    .items {
+        width: 100%;
+        min-height: calc(~"100% - 465px");
+        background-color: @items;
+        padding: 15px 10px;
+        box-sizing: border-box;
+        h2 {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-top: 1px solid gray;
+            box-sizing: border-box;
+            border-collapse: collapse;
+            tr {
+                border-bottom: 1px solid rgb(212, 212, 212);
+                font-size: 0.8rem;
+                th {
+                    background-color: @th;
+                    font-weight: normal;
+                    padding: 3px;
+                }
+                td {
+                    background-color: white;
+                    h3 {
+                        font-size: 0.8rem;
+                    }
+                }
+                .product-head, .product {
+                    text-align: left;
+                    padding-left: 10px;
+                }
+                .price-head, .price {
+                    text-align: center;
+                }
+                .quantity-head, .quantity {
+                    text-align: right;
+                }
+                .total-head, .total {
+                    text-align: right;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+    footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        background-color: @footer;
+        i {
+            font-size: 0.8125rem;
+            color: gray;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+}
