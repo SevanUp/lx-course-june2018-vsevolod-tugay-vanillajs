@@ -19,6 +19,7 @@ h2,
 p,
 li,
 input,
+label,
 table {
   font-family: 'Open Sans', sans-serif;
 }
@@ -42,26 +43,22 @@ li {
   font-size: 0.8rem;
   font-weight: 400;
 }
+label,
+input {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
 a {
   text-decoration: none;
 }
-.main {
+.main-app {
   display: flex;
   width: 1200px;
-  min-width: 800px;
+  min-width: 700px;
+  max-height: 100vh;
   background: red;
   margin: auto;
   box-shadow: 0 0 40px gray;
-}
-.message {
-  width: 225px;
-  height: 80px;
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 0.8125rem;
-  border-radius: 10px;
-  outline: none;
-  resize: none;
 }
 ::placeholder {
   opacity: 1;
@@ -82,10 +79,11 @@ a {
   font-style: italic;
   font-size: 0.8125rem;
 }
-.full {
+.order-full-info {
   width: calc(100% - 300px);
+  max-height: 100vh;
 }
-.full header {
+.order-full-info header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +93,13 @@ a {
   border-bottom: 1px solid #afafaf;
   box-sizing: border-box;
 }
-.full .order {
+.order-full-info .main-order {
+  height: calc(100vh - 70px);
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: #f4f4f4;
+}
+.order-full-info .order-info {
   display: flex;
   justify-content: flex-start;
   width: 100%;
@@ -105,25 +109,25 @@ a {
   padding: 25px 30px 0 30px;
   box-sizing: border-box;
 }
-.full .order .info {
+.order-full-info .order-info .main-order-info {
   width: 50%;
 }
-.full .order .info h2 {
+.order-full-info .order-info .main-order-info h2 {
   font-size: 1.2rem;
   margin-bottom: 16px;
 }
-.full .order .info li {
+.order-full-info .order-info .main-order-info li {
   margin-bottom: 5px;
 }
-.full .order .info li:last-of-type {
+.order-full-info .order-info .main-order-info li:last-of-type {
   margin-bottom: 30px;
 }
-.full .order .info .choice {
+.order-full-info .order-info .main-order-info .choose-addition-order-info {
   display: flex;
   justify-content: flex-start;
   padding-bottom: 7px;
 }
-.full .order .info .choice .icon-choice {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,16 +140,16 @@ a {
   margin-right: 30px;
   cursor: pointer;
 }
-.full .order .info .choice .icon-choice i {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice i {
   color: #2e2399;
 }
-.full .order .info .choice .icon-choice:hover {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover {
   background-color: #2e2399;
 }
-.full .order .info .choice .icon-choice:hover i {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover i {
   color: white;
 }
-.full .order .info .choice .icon-choice:hover::after {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover::after {
   content: '';
   display: block;
   position: absolute;
@@ -155,21 +159,21 @@ a {
   height: 2px;
   background-color: #2e2399;
 }
-.full .order .price {
+.order-full-info .order-info .price-order-info {
   width: 50%;
 }
-.full .order .price p {
+.order-full-info .order-info .price-order-info p {
   float: right;
   clear: right;
 }
-.full .order .price p:first-of-type {
+.order-full-info .order-info .price-order-info p:first-of-type {
   font-size: 1.2rem;
   line-height: 1;
 }
-.full .order .price p:last-of-type {
+.order-full-info .order-info .price-order-info p:last-of-type {
   font-size: 0.7rem;
 }
-.full .addition {
+.order-full-info .addition-order-info {
   width: 100%;
   height: 180px;
   background-color: white;
@@ -177,69 +181,73 @@ a {
   border-bottom: 2px solid #afafaf;
   box-sizing: border-box;
 }
-.full .addition h2 {
+.order-full-info .addition-order-info h2 {
   padding-left: 20px;
   margin-bottom: 10px;
 }
-.full .addition ul {
+.order-full-info .addition-order-info form {
   display: inline-block;
-  margin: 10px 0 10px 10px;
+  margin: 10px 0 10px 20%;
 }
-.full .addition ul:first-of-type {
+.order-full-info .addition-order-info form label {
+  display: block;
   text-align: right;
-  margin-left: 20%;
 }
-.full .items {
+.order-full-info .addition-order-info form input {
+  text-align: left;
+  border: none;
+  margin-left: 10px;
+}
+.order-full-info .order-items {
   width: 100%;
-  min-height: calc(100% - 465px);
   background-color: #f4f4f4;
   padding: 15px 10px;
   box-sizing: border-box;
 }
-.full .items h2 {
+.order-full-info .order-items h2 {
   padding-left: 20px;
   margin-bottom: 10px;
 }
-.full .items table {
+.order-full-info .order-items table {
   width: 100%;
   border-top: 1px solid gray;
   box-sizing: border-box;
   border-collapse: collapse;
 }
-.full .items table tr {
+.order-full-info .order-items table tr {
   border-bottom: 1px solid #d4d4d4;
   font-size: 0.8rem;
 }
-.full .items table tr th {
+.order-full-info .order-items table tr th {
   background-color: linear-gradient(to bottom, #e2e2e2, #838282);
   font-weight: normal;
   padding: 3px;
 }
-.full .items table tr td {
+.order-full-info .order-items table tr td {
   background-color: white;
 }
-.full .items table tr td h3 {
+.order-full-info .order-items table tr td h3 {
   font-size: 0.8rem;
 }
-.full .items table tr .product-head,
-.full .items table tr .product {
+.order-full-info .order-items table tr .item-product-head,
+.order-full-info .order-items table tr .item-product {
   text-align: left;
   padding-left: 10px;
 }
-.full .items table tr .price-head,
-.full .items table tr .price {
+.order-full-info .order-items table tr .item-price-head,
+.order-full-info .order-items table tr .item-price {
   text-align: center;
 }
-.full .items table tr .quantity-head,
-.full .items table tr .quantity {
+.order-full-info .order-items table tr .item-quantity-head,
+.order-full-info .order-items table tr .item-quantity {
   text-align: right;
 }
-.full .items table tr .total-head,
-.full .items table tr .total {
+.order-full-info .order-items table tr .item-total-head,
+.order-full-info .order-items table tr .item-total {
   text-align: right;
   padding-right: 10px;
 }
-.full footer {
+.order-full-info footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -247,13 +255,13 @@ a {
   height: 40px;
   background-color: #10052d;
 }
-.full footer i {
+.order-full-info footer i {
   font-size: 0.8125rem;
   color: gray;
   margin-right: 10px;
   cursor: pointer;
 }
-.short {
+.order-short-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -262,7 +270,7 @@ a {
   border-right: 1px solid #afafaf;
   box-sizing: border-box;
 }
-.short header {
+.order-short-info header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -270,13 +278,13 @@ a {
   width: 100%;
   height: 30px;
 }
-.short header i {
+.order-short-info header i {
   position: absolute;
   top: 5px;
   left: 10px;
   color: #2e2399;
 }
-.short form {
+.order-short-info .search-order {
   display: flex;
   justify-content: center;
   position: relative;
@@ -284,66 +292,67 @@ a {
   padding: 2px;
   box-sizing: border-box;
 }
-.short form input {
+.order-short-info .search-order input {
   width: 100%;
   padding: 2px 50px 2px 5px;
   font-style: italic;
   outline: none;
 }
-.short form .actions {
+.order-short-info .search-order .actions {
   position: absolute;
   right: 10px;
 }
-.short form .actions i {
+.order-short-info .search-order .actions i {
   color: #2e2399;
   font-size: 0.8125rem;
   margin-left: 10px;
   cursor: pointer;
 }
-.short .orders-list {
+.order-short-info .orders-list {
   width: 100%;
-  max-height: 610px;
-  min-height: 600px;
+  max-height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   overflow: scroll;
   overflow-x: hidden;
 }
-.short .orders-list .item {
+.order-short-info .orders-list .order-single {
   display: flex;
   height: 100px;
   padding: 15px 10px;
   border-bottom: 1px solid #afafaf;
   box-sizing: border-box;
+  cursor: pointer;
 }
-.short .orders-list .item p {
+.order-short-info .orders-list .order-single p {
   margin-bottom: 5px;
 }
-.short .orders-list .item .basic {
+.order-short-info .orders-list .order-single .basic-info {
   width: 80%;
 }
-.short .orders-list .item .basic h2 {
+.order-short-info .orders-list .order-single .basic-info h2 {
   margin-bottom: 7px;
 }
-.short .orders-list .item .time p {
+.order-short-info .orders-list .order-single .time-info p {
   float: right;
   text-align: right;
 }
-.short .orders-list .item .time p:first-of-type {
+.order-short-info .orders-list .order-single .time-info p:first-of-type {
   font-size: 1.3rem;
   font-weight: 600;
 }
-.short .orders-list .item .time .in-time {
+.order-short-info .orders-list .order-single .time-info .is-in-time {
   color: #01b81c;
 }
-.short .orders-list .item .time .urgent {
+.order-short-info .orders-list .order-single .time-info .is-urgent {
   color: #af3700;
 }
-.short .orders-list .item:last-of-type {
+.order-short-info .orders-list .order-single:last-of-type {
   border-bottom: none;
 }
-.short .orders-list .item:hover {
+.order-short-info .orders-list .order-single:hover {
   background: #e0ecff;
 }
-.short footer {
+.order-short-info footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -353,12 +362,12 @@ a {
   border-right: 1px solid #afafaf;
   box-sizing: border-box;
 }
-.short footer i {
+.order-short-info footer i {
   font-size: 0.8125rem;
   margin-left: 30px;
   color: gray;
   cursor: pointer;
 }
-.short footer i:last-of-type {
+.order-short-info footer i:last-of-type {
   margin-right: 10px;
 }
