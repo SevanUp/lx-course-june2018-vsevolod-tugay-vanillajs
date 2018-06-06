@@ -60,6 +60,9 @@ a {
   margin: auto;
   box-shadow: 0 0 40px gray;
 }
+.hidden {
+  visibility: hidden;
+}
 ::placeholder {
   opacity: 1;
   font-family: 'Open Sans', sans-serif;
@@ -143,13 +146,13 @@ a {
 .order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice i {
   color: #2e2399;
 }
-.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice.chosen-action {
   background-color: #2e2399;
 }
-.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover i {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice.chosen-action i {
   color: white;
 }
-.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice:hover::after {
+.order-full-info .order-info .main-order-info .choose-addition-order-info .icon-choice.chosen-action::after {
   content: '';
   display: block;
   position: absolute;
@@ -208,6 +211,30 @@ a {
   padding-left: 20px;
   margin-bottom: 10px;
 }
+.order-full-info .order-items .search-order {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.order-full-info .order-items .search-order input {
+  width: 100%;
+  padding: 2px 50px 2px 5px;
+  font-style: italic;
+  outline: none;
+}
+.order-full-info .order-items .search-order .actions {
+  position: absolute;
+  right: 10px;
+}
+.order-full-info .order-items .search-order .actions i {
+  color: #2e2399;
+  font-size: 0.8125rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
 .order-full-info .order-items table {
   width: 100%;
   border-top: 1px solid gray;
@@ -223,7 +250,22 @@ a {
   font-weight: normal;
   padding: 3px;
 }
+.order-full-info .order-items table tr th i {
+  font-size: 1rem;
+  padding: 5px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+.order-full-info .order-items table tr th i.sort-increase {
+  opacity: 1;
+  color: green;
+}
+.order-full-info .order-items table tr th i.sort-decrease {
+  opacity: 1;
+  color: red;
+}
 .order-full-info .order-items table tr td {
+  width: 25%;
   background-color: white;
 }
 .order-full-info .order-items table tr td h3 {
@@ -349,7 +391,7 @@ a {
 .order-short-info .orders-list .order-single:last-of-type {
   border-bottom: none;
 }
-.order-short-info .orders-list .order-single:hover {
+.order-short-info .orders-list .order-single.chosen-order {
   background: #e0ecff;
 }
 .order-short-info footer {

@@ -57,7 +57,7 @@
                     i {
                         color: @icons-color;
                     }
-                    &:hover {
+                    &.chosen-action {
                         background-color: @icons-color;
                         i {
                             color: white;
@@ -125,6 +125,30 @@
             padding-left: 20px;
             margin-bottom: 10px;
         }
+        .search-order {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            padding: 2px;
+            box-sizing: border-box;
+            input {
+                width: 100%;
+                padding: 2px 50px 2px 5px;
+                font-style: italic;
+                outline: none; 
+            }
+            .actions {
+                position: absolute;
+                right: 10px;
+                i {
+                    color: @icons-color;
+                    font-size: 0.8125rem;
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
         table {
             width: 100%;
             border-top: 1px solid gray;
@@ -137,8 +161,23 @@
                     background-color: @table-th-color;
                     font-weight: normal;
                     padding: 3px;
+                    i {
+                        font-size: 1rem;
+                        padding: 5px;
+                        opacity: 0.3;
+                        cursor: pointer;
+                    }
+                    i.sort-increase {
+                        opacity: 1;
+                        color: green;
+                    }
+                    i.sort-decrease {
+                        opacity: 1;
+                        color: red;
+                    }
                 }
                 td {
+                    width: 25%;
                     background-color: white;
                     h3 {
                         font-size: 0.8rem;
