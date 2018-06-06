@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script defer src="js/data.js"></script>
+    <script defer src="js/main.js"></script>
 </head>
 
 <body>
@@ -18,126 +20,16 @@
         <aside class="order-short-info">
             <header>
                 <a href=""><i class="fas fa-chevron-left"></i></a>
-                <h1>Orders (10)</h1>
+                <h1></h1>
             </header>
             <form action="" class="search-order">
-                <input type="text" placeholder="Поиск">
+                <input type="text" placeholder="Поиск" id="input-search-list">
                 <div class="actions">
                     <i class="fas fa-search"></i>
                     <i class="fas fa-sync"></i>
                 </div>
             </form>
             <ul class="orders-list">
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-urgent">Urgent</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-                <li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-				<li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
-				<li class="order-single">
-                    <div class="basic-info">
-                        <h2>Order 7991</h2>
-                        <p>Around the horn</p>
-                        <p>Shipped: 25 нояб. 2016г.</p>
-                    </div>
-                    <div class="time-info">
-                        <p>21.11.2016</p>
-                        <p class="is-in-time">In time</p>
-                    </div>
-                </li>
             </ul>
             <footer>
                 <i class="fas fa-filter"></i>
@@ -149,80 +41,50 @@
                 <h1>Order</h1>
             </header>
             <section class="main-order">
-                <section class="order-info">
+                <section class="order-info hidden">
                     <div class="main-order-info">
-                        <h2>Order 7991</h2>
+                        <h2></h2>
                         <ul>
-                            <li>Customer: Tortuga Restaurante</li>
-                            <li>Ordered: 18 сент. 2016 г.</li>
-                            <li>Shipped: 26 сент. 2016 г.</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
                         </ul>
                         <div class="choose-addition-order-info">
-                            <div class="icon-choice"><i class="fas fa-truck"></i></div>
-                            <div class="icon-choice"><i class="fas fa-user"></i></div>
+                            <div class="icon-choice" data-action="1"><i class="fas fa-truck"></i></div>
+                            <div class="icon-choice" data-action="2"><i class="fas fa-user"></i></div>
                         </div>
                     </div>
                     <div class="price-order-info">
-                        <p>150 935,13</p>
-                        <p>EUR</p>
+                        <p></p>
+                        <p></p>
                     </div>
                 </section>
-                <section class="addition-order-info">
-                    <h2>Shipping Address</h2>
+                <section class="addition-order-info hidden">
+                    <h2></h2>
                     <hr>
-                    <form action="">
-                        <label>Name: <input type="text" value="Excellent Parcel" readonly></label>
-                        <label>Street: <input type="text" value="Tottenham Court Road" readonly></label>
-                        <label>ZIP Code / City: <input type="text" value="N17OAA London" readonly></label>
-                        <label>Region: <input type="text" value="Greater London" readonly></label>
-                        <label>Country: <input type="text" value="United Kingdom" readonly></label>
+                    <form action="" id="order-chosen-info">
                     </form>
                 </section>
-                <section class="order-items">
-                    <h2>Line items (4)</h2>
+                <section class="order-items hidden">
+                    <h2></h2>
+                    <form action="" class="search-order">
+                        <input type="text" placeholder="Поиск" id="input-search-table">
+                        <div class="actions">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </form>
                     <table>
                         <tr>
-                            <th class="item-product-head">Product</th>
-                            <th class="item-price-head">Unit Price</th>
-                            <th class="item-quantity-head">Quantity</th>
-                            <th class="item-total-head">Total</th>
+                            <th class="item-product-head">Product
+                                <i class="fas fa-angle-up" data-sort-type="product" data-state="1"></i></th>
+                            <th class="item-price-head">Unit Price
+                                <i class="fas fa-angle-up" data-sort-type="price" data-state="1"></i></th>
+                            <th class="item-quantity-head">Quantity
+                                <i class="fas fa-angle-up" data-sort-type="quantity" data-state="1"></i></th>
+                            <th class="item-total-head">Total
+                                <i class="fas fa-angle-up" data-sort-type="total" data-state="1"></i></th>
                         </tr>
-                        <tr>
-                            <td class="item-product">
-                                <h3>Aniseed Syrup</h3>
-                                <p>1412</p>
-                            </td>
-                            <td class="item-price"><strong>65.89</strong> EUR</td>
-                            <td class="item-quantity">899</td>
-                            <td class="item-total"><strong>59 235,11</strong> EUR</td>
-                        </tr>
-                        <tr>
-                            <td class="item-product">
-                                <h3>Aniseed Syrup</h3>
-                                <p>1412</p>
-                            </td>
-                            <td class="item-price"><strong>65.89</strong> EUR</td>
-                            <td class="item-quantity">899</td>
-                            <td class="item-total"><strong>59 235,11</strong> EUR</td>
-                        </tr>
-                        <tr>
-                            <td class="item-product">
-                                <h3>Aniseed Syrup</h3>
-                                <p>1412</p>
-                            </td>
-                            <td class="item-price"><strong>65.89</strong> EUR</td>
-                            <td class="item-quantity">899</td>
-                            <td class="item-total"><strong>59 235,11</strong> EUR</td>
-                        </tr>
-                        <tr>
-                            <td class="item-product">
-                                <h3>Aniseed Syrup</h3>
-                                <p>1412</p>
-                            </td>
-                            <td class="item-price"><strong>65.89</strong> EUR</td>
-                            <td class="item-quantity">899</td>
-                            <td class="item-total"><strong>59 235,11</strong> EUR</td>
-                        </tr>
+
                     </table>
                 </section>
             </section>
