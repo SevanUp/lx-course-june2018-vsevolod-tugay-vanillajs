@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script defer src="js/data.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe7LXFHARqWhJNO1x1lKryOwfLqBqFZNw"></script>
     <script defer src="js/main.js"></script>
 </head>
 
@@ -22,7 +22,7 @@
                 <a href=""><i class="fas fa-chevron-left"></i></a>
                 <h1></h1>
             </header>
-            <form action="" class="search-order">
+            <form action="" onsubmit="return false" class="search-order">
                 <input type="text" placeholder="Поиск" id="input-search-list">
                 <div class="actions">
                     <i class="fas fa-search"></i>
@@ -32,6 +32,7 @@
             <ul class="orders-list">
             </ul>
             <footer>
+                <i class="fas fa-plus" id="add-order"></i>
                 <i class="fas fa-filter"></i>
                 <i class="fas fa-bars"></i>
             </footer>
@@ -43,20 +44,21 @@
             <section class="main-order">
                 <section class="order-info hidden">
                     <div class="main-order-info">
-                        <h2></h2>
-                        <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
+                        <h2 class="order-name"></h2>
+                        <ul class="data-list">
+                            <li class="order-customer"></li>
+                            <li class="order-ordered"></li>
+                            <li class="order-shipped"></li>
                         </ul>
                         <div class="choose-addition-order-info">
                             <div class="icon-choice" data-action="1"><i class="fas fa-truck"></i></div>
-                            <div class="icon-choice" data-action="2"><i class="fas fa-user"></i></div>
+                            <div class="icon-choice" data-action="2"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="icon-choice" data-action="3"><i class="fas fa-user"></i></div>
                         </div>
                     </div>
                     <div class="price-order-info">
-                        <p></p>
-                        <p></p>
+                        <p class="order-total-price"></p>
+                        <p class="order-currency"></p>
                     </div>
                 </section>
                 <section class="addition-order-info hidden">
@@ -66,14 +68,17 @@
                     </form>
                 </section>
                 <section class="order-items hidden">
-                    <h2></h2>
-                    <form action="" class="search-order">
+                    <div class="table-header">
+                        <h2 class="total-items"></h2>
+                        <i class="fas fa-plus" id="add-product-icon"></i>
+                    </div>
+                    <form action="" onsubmit="return false" class="search-order">
                         <input type="text" placeholder="Поиск" id="input-search-table">
                         <div class="actions">
                             <i class="fas fa-search"></i>
                         </div>
                     </form>
-                    <table>
+                    <table class="table-items">
                         <tr>
                             <th class="item-product-head">Product
                                 <i class="fas fa-angle-up" data-sort-type="product" data-state="1"></i></th>
@@ -83,12 +88,13 @@
                                 <i class="fas fa-angle-up" data-sort-type="quantity" data-state="1"></i></th>
                             <th class="item-total-head">Total
                                 <i class="fas fa-angle-up" data-sort-type="total" data-state="1"></i></th>
+                            <th class="item-trash-head"></th>
                         </tr>
-
                     </table>
                 </section>
             </section>
             <footer>
+                <i class="fas fa-trash-alt" id="delete-order"></i>
                 <i class="fas fa-envelope"></i>
             </footer>
         </section>

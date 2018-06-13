@@ -16,6 +16,7 @@ body {
 }
 h1,
 h2,
+h3,
 p,
 li,
 input,
@@ -56,7 +57,7 @@ a {
   width: 1200px;
   min-width: 700px;
   max-height: 100vh;
-  background: red;
+  background: white;
   margin: auto;
   box-shadow: 0 0 40px gray;
 }
@@ -81,6 +82,78 @@ a {
   font-weight: 400;
   font-style: italic;
   font-size: 0.8125rem;
+}
+.background-dialog {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(7, 7, 7, 0.82);
+}
+.background-dialog #cancel-form {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.background-dialog #cancel-form i {
+  font-size: 2rem;
+  color: white;
+}
+#add-order-form,
+#add-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 20px 80px;
+  max-height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  background-color: #2e2399;
+}
+#add-order-form h2,
+#add-product-form h2 {
+  font-size: 1.5rem;
+  color: white;
+}
+#add-order-form h3,
+#add-product-form h3 {
+  font-size: 1rem;
+  color: white;
+}
+#add-order-form label,
+#add-product-form label {
+  display: block;
+  position: relative;
+  width: 250px;
+  color: white;
+}
+#add-order-form label input,
+#add-product-form label input {
+  width: 100%;
+  padding: 2px 4px;
+  text-align: left;
+  outline: none;
+}
+#add-order-form label[data-req]::before,
+#add-product-form label[data-req]::before {
+  content: '*';
+  position: absolute;
+  left: -20px;
+  color: white;
+  font-size: 1rem;
+}
+#add-order-form #add-order-submit,
+#add-product-form #add-order-submit,
+#add-order-form #add-product-submit,
+#add-product-form #add-product-submit {
+  padding: 4px 10px;
+  font-family: 'Open Sans', sans-serif;
 }
 .order-full-info {
   width: calc(100% - 300px);
@@ -177,8 +250,9 @@ a {
   font-size: 0.7rem;
 }
 .order-full-info .addition-order-info {
+  position: relative;
   width: 100%;
-  height: 180px;
+  min-height: 180px;
   background-color: white;
   padding: 15px 10px;
   border-bottom: 2px solid #afafaf;
@@ -201,15 +275,42 @@ a {
   border: none;
   margin-left: 10px;
 }
+.order-full-info .addition-order-info form input[type="button"],
+.order-full-info .addition-order-info form input[type="submit"] {
+  width: 80px;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.order-full-info .addition-order-info form input.active {
+  background-color: rgba(224, 236, 255, 0.7);
+}
+.order-full-info .addition-order-info form #map {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 50px);
+}
 .order-full-info .order-items {
   width: 100%;
   background-color: #f4f4f4;
   padding: 15px 10px;
   box-sizing: border-box;
 }
-.order-full-info .order-items h2 {
-  padding-left: 20px;
+.order-full-info .order-items .table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+}
+.order-full-info .order-items .table-header h2 {
+  padding-left: 20px;
+}
+.order-full-info .order-items .table-header i {
+  padding-right: 20px;
+  cursor: pointer;
 }
 .order-full-info .order-items .search-order {
   display: flex;
@@ -265,14 +366,17 @@ a {
   color: red;
 }
 .order-full-info .order-items table tr td {
-  width: 25%;
   background-color: white;
 }
 .order-full-info .order-items table tr td h3 {
   font-size: 0.8rem;
 }
+.order-full-info .order-items table tr td i {
+  cursor: pointer;
+}
 .order-full-info .order-items table tr .item-product-head,
 .order-full-info .order-items table tr .item-product {
+  width: 25%;
   text-align: left;
   padding-left: 10px;
 }
@@ -282,12 +386,20 @@ a {
 }
 .order-full-info .order-items table tr .item-quantity-head,
 .order-full-info .order-items table tr .item-quantity {
+  width: 10%;
   text-align: right;
 }
 .order-full-info .order-items table tr .item-total-head,
 .order-full-info .order-items table tr .item-total {
+  width: 20%;
   text-align: right;
-  padding-right: 10px;
+}
+.order-full-info .order-items table tr .item-trash-head,
+.order-full-info .order-items table tr .item-trash {
+  text-align: center;
+}
+.order-full-info .order-items table tr .item-trash {
+  cursor: pointer;
 }
 .order-full-info footer {
   display: flex;
@@ -300,7 +412,8 @@ a {
 .order-full-info footer i {
   font-size: 0.8125rem;
   color: gray;
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
   cursor: pointer;
 }
 .order-short-info {

@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
 }
-h1, h2, p, li, input, label, table{
+h1, h2, h3, p, li, input, label, table{
     font-family: 'Open Sans', sans-serif;
 }
 h1 {
@@ -48,7 +48,7 @@ a {
     width: 1200px;
     min-width: 700px;
     max-height: 100vh;
-    background: red;
+    background: white;
     margin: auto;
     box-shadow: 0 0 40px gray;
 }
@@ -73,4 +73,70 @@ a {
     font-weight: 400;
     font-style: italic;
     font-size: 0.8125rem;
+}
+
+.background-dialog {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background: rgba(7, 7, 7, 0.82);
+    #cancel-form {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        cursor: pointer;
+        i {
+            font-size: 2rem;
+            color: white;
+        }
+    }
+}
+
+#add-order-form, #add-product-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 20px 80px;
+    max-height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    background-color: #2e2399;
+    
+    h2 {
+        font-size: 1.5rem;
+        color: white;
+    }
+    h3 {
+        font-size: 1rem;
+        color: white;
+    }
+    label {
+        display: block;
+        position: relative;
+        width: 250px;
+        color: white;
+        input {
+            width: 100%;
+            padding: 2px 4px;
+            text-align: left;
+            outline: none;
+        }
+        &[data-req]::before {
+            content: '*';
+            position: absolute;
+            left: -20px;
+            color: white;
+            font-size: 1rem;
+        }
+    }
+    #add-order-submit, #add-product-submit {
+        padding: 4px 10px;
+        font-family: 'Open Sans', sans-serif;
+    }
 }
