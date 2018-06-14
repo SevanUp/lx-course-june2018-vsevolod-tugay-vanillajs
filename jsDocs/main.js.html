@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Model class. Knows everything about API endpoint and data structure.
  *
  * @constructor
@@ -20,7 +48,7 @@ function Model() {
         return new Promise(function(resolve, reject) {
             var req = new XMLHttpRequest();
 
-            if (id && isProducts) {
+            if (id &amp;&amp; isProducts) {
                 req.open("GET", "http://localhost:3000/api/Orders/" + id + "/products");
             } else {
                 if (id) {
@@ -31,7 +59,7 @@ function Model() {
             }
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     resolve(JSON.parse(req.responseText));
                 } else {
                     reject(new Error("Request failed: " + req.statusText));
@@ -89,7 +117,7 @@ function Model() {
                 }
             };
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     alert("Order was successfully added");
                     resolve();
                 } else {
@@ -132,7 +160,7 @@ function Model() {
             order.shipTo.country = values[4];
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     resolve(order.id);
                 } else {
                     reject(new Error("Request failed: " + req.statusText));
@@ -173,7 +201,7 @@ function Model() {
             order.customerInfo.email = values[4];
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     resolve(order.id);
                 } else {
                     reject(new Error("Request failed: " + req.statusText));
@@ -219,7 +247,7 @@ function Model() {
             };
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     alert("Product was successfully added");
                     var response = JSON.parse(req.responseText);
                     resolve(id);
@@ -257,7 +285,7 @@ function Model() {
             req.open("DELETE", "http://localhost:3000/api/Orders/" + id);
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     alert("Order was successful deleted");
                     resolve();
                 } else {
@@ -297,7 +325,7 @@ function Model() {
             req.open("DELETE", "http://localhost:3000/api/OrderProducts/" + productId);
 
             req.addEventListener("load", function() {
-                if (req.status < 400) {
+                if (req.status &lt; 400) {
                     alert("Product was successfully deleted");
                     resolve(orderId);
                 } else {
@@ -315,7 +343,7 @@ function Model() {
 }
 
 /**
- * View class. Knows everything about dom & manipulation and a little bit about data structure, which should be
+ * View class. Knows everything about dom &amp; manipulation and a little bit about data structure, which should be
  * filled into UI element.
  *
  * @constructor
@@ -401,7 +429,7 @@ function View() {
 
         this.normalizeOrderData(orders);
 
-        for (i = 0; i < orders.length; i++) {
+        for (i = 0; i &lt; orders.length; i++) {
             var orderListSingle = orderListTemplate.cloneNode(true);
             orderListSingle.setAttribute("data-order-id", "" + orders[i].id);
 
@@ -474,17 +502,17 @@ function View() {
             mainOrderInfo.lastElementChild.firstElementChild.classList.add("chosen-action");
             additionOrderInfo.firstElementChild.innerHTML = "Shipping Address";
             orderChosenInfo.setAttribute("data-info", "1");
-            orderChosenInfo.innerHTML = '\n<label>Name: <input type="text" value="' +
+            orderChosenInfo.innerHTML = '\n&lt;label>Name: &lt;input type="text" value="' +
                 order.shipTo.name +
-                '" readonly id="input-name-ship-local"></label>\n<label>Street: <input type="text" value="' +
+                '" readonly id="input-name-ship-local">&lt;/label>\n&lt;label>Street: &lt;input type="text" value="' +
                 order.shipTo.address +
-                '" readonly id="input-address-ship-local"></label>\n<label>ZIP Code / City: <input type="text" value="' +
+                '" readonly id="input-address-ship-local">&lt;/label>\n&lt;label>ZIP Code / City: &lt;input type="text" value="' +
                 order.shipTo.ZIP +
-                '" readonly id="input-zip-ship-local"></label>\n<label>Region: <input type="text" value="' +
+                '" readonly id="input-zip-ship-local">&lt;/label>\n&lt;label>Region: &lt;input type="text" value="' +
                 order.shipTo.region +
-                '" readonly id="input-region-ship-local"></label>\n<label>Country: <input type="text" value="' +
+                '" readonly id="input-region-ship-local">&lt;/label>\n&lt;label>Country: &lt;input type="text" value="' +
                 order.shipTo.country +
-                '" readonly id="input-country-ship-local"></label>\n<input type="button" value="Edit" id="edit-ship">\n<input type="submit" value="Save">';
+                '" readonly id="input-country-ship-local">&lt;/label>\n&lt;input type="button" value="Edit" id="edit-ship">\n&lt;input type="submit" value="Save">';
 
             var editShip = document.getElementById("edit-ship");
 
@@ -593,20 +621,20 @@ function View() {
 
         var rowItemsTemplate = this.createOrderItemTemplate();
 
-        for (i = 0; i < products.length; i++) {
+        for (i = 0; i &lt; products.length; i++) {
 
             var rowItemSingle = rowItemsTemplate.cloneNode(true);
 
             rowItemSingle.getElementsByClassName("item-product")[0].firstElementChild.innerHTML = "" + products[i].name;
             rowItemSingle.getElementsByClassName("item-product")[0].lastElementChild.innerHTML = "" + products[i].id;
 
-            rowItemSingle.getElementsByClassName("item-price")[0].innerHTML = "<strong>" + products[i].price + "</strong> " + products[i].currency;
+            rowItemSingle.getElementsByClassName("item-price")[0].innerHTML = "&lt;strong>" + products[i].price + "&lt;/strong> " + products[i].currency;
 
             rowItemSingle.getElementsByClassName("item-quantity")[0].innerHTML = "" + products[i].quantity;
 
-            rowItemSingle.getElementsByClassName("item-total")[0].innerHTML = "<strong>" + products[i].totalPrice + "</strong> " + products[i].currency;
+            rowItemSingle.getElementsByClassName("item-total")[0].innerHTML = "&lt;strong>" + products[i].totalPrice + "&lt;/strong> " + products[i].currency;
 
-            rowItemSingle.getElementsByClassName("item-trash")[0].innerHTML = "<i class=\"fas fa-trash-alt\" data-product-id=\"" + products[i].id + "\"></i>";
+            rowItemSingle.getElementsByClassName("item-trash")[0].innerHTML = "&lt;i class=\"fas fa-trash-alt\" data-product-id=\"" + products[i].id + "\">&lt;/i>";
 
             itemsTable.appendChild(rowItemSingle);
         }
@@ -631,17 +659,17 @@ function View() {
                 iconChoice.classList.add("chosen-action");
                 additionOrderInfo.firstElementChild.innerHTML = "Shipping Address";
                 orderChosenInfo.setAttribute("data-info", "1");
-                orderChosenInfo.innerHTML = '\n<label>Name: <input type="text" value="' +
+                orderChosenInfo.innerHTML = '\n&lt;label>Name: &lt;input type="text" value="' +
                     order.shipTo.name +
-                    '" readonly id="input-name-ship-local"></label>\n<label>Street: <input type="text" value="' +
+                    '" readonly id="input-name-ship-local">&lt;/label>\n&lt;label>Street: &lt;input type="text" value="' +
                     order.shipTo.address +
-                    '" readonly id="input-address-ship-local"></label>\n<label>ZIP Code / City: <input type="text" value="' +
+                    '" readonly id="input-address-ship-local">&lt;/label>\n&lt;label>ZIP Code / City: &lt;input type="text" value="' +
                     order.shipTo.ZIP +
-                    '" readonly id="input-zip-ship-local"></label>\n<label>Region: <input type="text" value="' +
+                    '" readonly id="input-zip-ship-local">&lt;/label>\n&lt;label>Region: &lt;input type="text" value="' +
                     order.shipTo.region +
-                    '" readonly id="input-region-ship-local"></label>\n<label>Country: <input type="text" value="' +
+                    '" readonly id="input-region-ship-local">&lt;/label>\n&lt;label>Country: &lt;input type="text" value="' +
                     order.shipTo.country +
-                    '" readonly id="input-country-ship-local"></label>\n <input type="button" value="Edit" id="edit-ship">\n<input type="submit" value="Save">';
+                    '" readonly id="input-country-ship-local">&lt;/label>\n &lt;input type="button" value="Edit" id="edit-ship">\n&lt;input type="submit" value="Save">';
 
                 var editShip = document.getElementById("edit-ship");
 
@@ -667,24 +695,24 @@ function View() {
                 iconChoice.classList.add("chosen-action");
                 additionOrderInfo.firstElementChild.innerHTML = "Map";
                 orderChosenInfo.setAttribute("data-info", "2");
-                orderChosenInfo.innerHTML = "<div id=\"map\">Hello</div>";
+                orderChosenInfo.innerHTML = "&lt;div id=\"map\">Hello&lt;/div>";
                 this.addMap(order, document.getElementById("map"));
                 break;
             case 3:
                 iconChoice.classList.add("chosen-action");
                 additionOrderInfo.firstElementChild.innerHTML = "Customer Information";
                 orderChosenInfo.setAttribute("data-info", "3");
-                orderChosenInfo.innerHTML = '\n<label>First Name: <input type="text" value = "' +
+                orderChosenInfo.innerHTML = '\n&lt;label>First Name: &lt;input type="text" value = "' +
                     order.customerInfo.firstName +
-                    '" readonly id="input-first-customer-local"></label>\n<label>Last Name: <input type="text" value = "' +
+                    '" readonly id="input-first-customer-local">&lt;/label>\n&lt;label>Last Name: &lt;input type="text" value = "' +
                     order.customerInfo.lastName +
-                    '" readonly id="input-last-customer-local"></label>\n<label>Address: <input type="text" value = "' +
+                    '" readonly id="input-last-customer-local">&lt;/label>\n&lt;label>Address: &lt;input type="text" value = "' +
                     order.customerInfo.address +
-                    '" readonly id="input-addres-customer-local"></label>\n<label>Phone: <input type="tel" value = "' +
+                    '" readonly id="input-addres-customer-local">&lt;/label>\n&lt;label>Phone: &lt;input type="tel" value = "' +
                     order.customerInfo.phone +
-                    '" readonly id="input-phone-customer-local"></label>\n<label>Email: <input type="email" value = "' +
+                    '" readonly id="input-phone-customer-local">&lt;/label>\n&lt;label>Email: &lt;input type="email" value = "' +
                     order.customerInfo.email +
-                    '" readonly id="input-email-customer-local"></label>\n<input type="button" value="Edit" id="edit-customer">\n<input type="submit" value="Save">';
+                    '" readonly id="input-email-customer-local">&lt;/label>\n&lt;input type="button" value="Edit" id="edit-customer">\n&lt;input type="submit" value="Save">';
 
                 var editCustomer = document.getElementById("edit-customer");
 
@@ -757,61 +785,61 @@ function View() {
      */
     this.sortActions = function(sortType, sortState, searchProducts) {
         //increase
-        if (sortState === 2 && sortType === "product") {
+        if (sortState === 2 &amp;&amp; sortType === "product") {
             searchProducts.sort(function(a, b) {
                 var keyA = a.name,
                     keyB = b.name;
-                return ((keyA < keyB) ? -1 : ((keyA > keyB) ? 1 : 0));
+                return ((keyA &lt; keyB) ? -1 : ((keyA > keyB) ? 1 : 0));
             });
         }
-        if (sortState === 2 && sortType === "price") {
+        if (sortState === 2 &amp;&amp; sortType === "price") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.price),
                     keyB = Number.parseFloat(b.price);
-                return ((keyA - keyB < 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
+                return ((keyA - keyB &lt; 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
             });
         }
-        if (sortState === 2 && sortType === "quantity") {
+        if (sortState === 2 &amp;&amp; sortType === "quantity") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.quantity),
                     keyB = Number.parseFloat(b.quantity);
-                return ((keyA - keyB < 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
+                return ((keyA - keyB &lt; 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
             });
         }
-        if (sortState === 2 && sortType === "total") {
+        if (sortState === 2 &amp;&amp; sortType === "total") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.totalPrice),
                     keyB = Number.parseFloat(b.totalPrice);
-                return ((keyA - keyB < 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
+                return ((keyA - keyB &lt; 0) ? -1 : ((keyA - keyB > 0) ? 1 : 0));
             });
         }
         //decrease
-        if (sortState === 3 && sortType === "product") {
+        if (sortState === 3 &amp;&amp; sortType === "product") {
             searchProducts.sort(function(a, b) {
                 var keyA = a.name,
                     keyB = b.name;
-                return ((keyA < keyB) ? 1 : ((keyA > keyB) ? -1 : 0));
+                return ((keyA &lt; keyB) ? 1 : ((keyA > keyB) ? -1 : 0));
             });
         }
-        if (sortState === 3 && sortType === "price") {
+        if (sortState === 3 &amp;&amp; sortType === "price") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.price),
                     keyB = Number.parseFloat(b.price);
-                return ((keyA - keyB < 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
+                return ((keyA - keyB &lt; 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
             });
         }
-        if (sortState === 3 && sortType === "quantity") {
+        if (sortState === 3 &amp;&amp; sortType === "quantity") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.quantity),
                     keyB = Number.parseFloat(b.quantity);
-                return ((keyA - keyB < 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
+                return ((keyA - keyB &lt; 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
             });
         }
-        if (sortState === 3 && sortType === "total") {
+        if (sortState === 3 &amp;&amp; sortType === "total") {
             searchProducts.sort(function(a, b) {
                 var keyA = Number.parseFloat(a.totalPrice),
                     keyB = Number.parseFloat(b.totalPrice);
-                return ((keyA - keyB < 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
+                return ((keyA - keyB &lt; 0) ? 1 : ((keyA - keyB > 0) ? -1 : 0));
             });
         }
         //normal
@@ -819,7 +847,7 @@ function View() {
             searchProducts.sort(function(a, b) {
                 var keyA = a.id,
                     keyB = b.id;
-                return ((keyA < keyB) ? -1 : ((keyA > keyB) ? 1 : 0));
+                return ((keyA &lt; keyB) ? -1 : ((keyA > keyB) ? 1 : 0));
             });
         }
 
@@ -839,7 +867,7 @@ function View() {
         var requestString = inputSearchList.value.trim().toLowerCase(),
             arrayOfPositiveOrders = [],
             normalDate;
-        for (i = 0; i < orders.length; i++) {
+        for (i = 0; i &lt; orders.length; i++) {
             for (var key in orders[i].summary) {
                 if (orders[i].summary[key].toString().includes(":")) {
                     normalDate = this.normalizeDate(orders[i].summary[key]);
@@ -878,7 +906,7 @@ function View() {
             searchProducts = null;
             this.fillTable(products);
         } else {
-            for (i = 0; i < products.length; i++) {
+            for (i = 0; i &lt; products.length; i++) {
                 for (var key in products[i]) {
                     if (products[i][key].toString().toLowerCase().match(requestString)) {
                         arrayOfPositiveProducts.push(products[i]);
@@ -911,7 +939,7 @@ function View() {
     this.normalizeDate = function(dateString) {
 
         // If it's not at least 6 characters long (8/8/88), give up.
-        if (dateString.length && dateString.length < 6) {
+        if (dateString.length &amp;&amp; dateString.length &lt; 6) {
             return '';
         }
 
@@ -956,7 +984,7 @@ function View() {
                 }
             }
         } else {
-            for (i = 0; i < orders.length; i++) {
+            for (i = 0; i &lt; orders.length; i++) {
                 for (var key in orders[i].summary) {
                     if (orders[i].summary[key].toString().includes(":")) {
                         normalDate = this.normalizeDate(orders[i].summary[key]);
@@ -1067,7 +1095,7 @@ function View() {
                     if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
                         map.setCenter(results[0].geometry.location);
                         var infowindow = new google.maps.InfoWindow({
-                            content: '<b>' + address + '</b>',
+                            content: '&lt;b>' + address + '&lt;/b>',
                             size: new google.maps.Size(150, 50)
                         });
                         var marker = new google.maps.Marker({
@@ -1337,25 +1365,25 @@ function View() {
     this.showAddOrderForm = function() {
         var background = orderDivTemplate.cloneNode(true);
         background.className = "background-dialog";
-        background.innerHTML = `<div id="cancel-form"><i class="fas fa-times"></i></div>
-                                <form action="" id="add-order-form">
-                                    <h2>Add order</h2>
-                                    <label data-req><input type="text" placeholder="Customer" required id="input-customer"></label>
+        background.innerHTML = `&lt;div id="cancel-form">&lt;i class="fas fa-times">&lt;/i>&lt;/div>
+                                &lt;form action="" id="add-order-form">
+                                    &lt;h2>Add order&lt;/h2>
+                                    &lt;label data-req>&lt;input type="text" placeholder="Customer" required id="input-customer">&lt;/label>
 
-                                    <h3>Shipping Address</h3>
-                                    <label><input type="text" placeholder="Name" id="input-name-ship"></label>
-                                    <label><input type="text" placeholder="Address" id="input-address-ship"></label>
-                                    <label><input type="text" placeholder="ZIP" id="input-zip-ship"></label>
-                                    <label><input type="text" placeholder="Region" id="input-region-ship"></label>
-                                    <label><input type="text" placeholder="Country" id="input-country-ship"></label>
-                                    <h3>Customer Information</h3>
-                                    <label><input type="text" placeholder="First name" id="input-first-name-customer"></label>
-                                    <label><input type="text" placeholder="Last name" id="input-last-name-customer"></label>
-                                    <label><input type="text" placeholder="Address" id="input-address-customer"></label>
-                                    <label><input type="tel" placeholder="Phone number" id="input-phone-customer"></label>
-                                    <label><input type="email" placeholder="Email" id="input-email-customer"></label>
-                                    <input type="submit" value="Add order" id="add-order-submit">
-                                </form>`;
+                                    &lt;h3>Shipping Address&lt;/h3>
+                                    &lt;label>&lt;input type="text" placeholder="Name" id="input-name-ship">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="Address" id="input-address-ship">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="ZIP" id="input-zip-ship">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="Region" id="input-region-ship">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="Country" id="input-country-ship">&lt;/label>
+                                    &lt;h3>Customer Information&lt;/h3>
+                                    &lt;label>&lt;input type="text" placeholder="First name" id="input-first-name-customer">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="Last name" id="input-last-name-customer">&lt;/label>
+                                    &lt;label>&lt;input type="text" placeholder="Address" id="input-address-customer">&lt;/label>
+                                    &lt;label>&lt;input type="tel" placeholder="Phone number" id="input-phone-customer">&lt;/label>
+                                    &lt;label>&lt;input type="email" placeholder="Email" id="input-email-customer">&lt;/label>
+                                    &lt;input type="submit" value="Add order" id="add-order-submit">
+                                &lt;/form>`;
         document.body.insertBefore(background, document.body.firstChild);
         return background;
     };
@@ -1368,7 +1396,7 @@ function View() {
     this.showAddProductForm = function() {
         var background = orderDivTemplate.cloneNode(true);
         background.className = "background-dialog";
-        background.innerHTML = "<div id=\"cancel-form\"><i class=\"fas fa-times\"></i></div>\n                            <form action=\"\" id=\"add-product-form\">\n                                <h2>Add product</h2>\n                                <label data-req><input type=\"text\" placeholder=\"Name\" required id=\"input-name-product\"></label>\n                                <label data-req><input type=\"number\" placeholder=\"Price\" required id=\"input-price-product\"></label>\n                                <label data-req><input type=\"text\" placeholder=\"Currency\" required id=\"input-currency-product\"></label>\n                                <label data-req><input type=\"number\" placeholder=\"Quantity\" required id=\"input-quantity-product\"></label>\n                                <input type=\"submit\" value=\"Add product\" id=\"add-product-submit\">\n                            </form>";
+        background.innerHTML = "&lt;div id=\"cancel-form\">&lt;i class=\"fas fa-times\">&lt;/i>&lt;/div>\n                            &lt;form action=\"\" id=\"add-product-form\">\n                                &lt;h2>Add product&lt;/h2>\n                                &lt;label data-req>&lt;input type=\"text\" placeholder=\"Name\" required id=\"input-name-product\">&lt;/label>\n                                &lt;label data-req>&lt;input type=\"number\" placeholder=\"Price\" required id=\"input-price-product\">&lt;/label>\n                                &lt;label data-req>&lt;input type=\"text\" placeholder=\"Currency\" required id=\"input-currency-product\">&lt;/label>\n                                &lt;label data-req>&lt;input type=\"number\" placeholder=\"Quantity\" required id=\"input-quantity-product\">&lt;/label>\n                                &lt;input type=\"submit\" value=\"Add product\" id=\"add-product-submit\">\n                            &lt;/form>";
         document.body.insertBefore(background, document.body.firstChild);
         return background;
     };
@@ -1505,7 +1533,7 @@ function View() {
      * @return {HTMLIconElement|null} icon of chosen sort or null.
      */
     this.isHaveSort = function() {
-        for (i = 0; i < itemsTable.firstElementChild.querySelectorAll("i").length; i++) {
+        for (i = 0; i &lt; itemsTable.firstElementChild.querySelectorAll("i").length; i++) {
             if (itemsTable.firstElementChild.querySelectorAll("i")[i].getAttribute("data-state") === "2" ||
                 itemsTable.firstElementChild.querySelectorAll("i")[i].getAttribute("data-state") === "3") {
                 return itemsTable.firstElementChild.querySelectorAll("i")[i];
@@ -1826,4 +1854,26 @@ function Controller(view, model) {
     };
 }
 
-new Controller(new View(), new Model()).init();
+new Controller(new View(), new Model()).init();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controller.html">Controller</a></li><li><a href="Model.html">Model</a></li><li><a href="View.html">View</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jun 14 2018 12:08:11 GMT+0300 (RTZ 2 (зима))
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
