@@ -1,320 +1,4 @@
 /**
- * Model class. Knows everything about API endpoint and data structure.
- *
- * @constructor
- */
-function Model() {
-
-    /**
-     * Get orders, specific order by id or products of specififc order.
-     *
-     * @param {Number} id the order id.
-     * 
-     * @param {Boolean} isProducts if we want get products.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR gets loaded/failed
-     *
-     * @public
-     */
-    this.getData = function(id, isProducts) {
-        return new Promise(function(resolve, reject) {
-            var req = new XMLHttpRequest();
-
-            if (id && isProducts) {
-                req.open("GET", "http://localhost:3000/api/Orders/" + id + "/products");
-            } else {
-                if (id) {
-                    req.open("GET", "http://localhost:3000/api/Orders/" + id);
-                } else {
-                    req.open("GET", "http://localhost:3000/api/Orders");
-                }
-            }
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    resolve(JSON.parse(req.responseText));
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(null);
-        });
-    };
-
-    /**
-     * Post new order to server.
-     *
-     * @param {String[]} values array of received from form values.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR posts loaded/failed
-     *
-     * @public
-     */
-    this.postOrder = function(values) {
-
-        return new Promise(function(resolve, reject) {
-            var req = new XMLHttpRequest();
-
-            req.open("POST", "http://localhost:3000/api/Orders");
-
-            req.setRequestHeader("Content-Type", "application/json");
-
-            var newOrder = {
-                "summary": {
-                    "createdAt": values[11],
-                    "customer": values[0],
-                    "status": "accepted",
-                    "shippedAt": values[11],
-                    "totalPrice": 0,
-                    "currency": "EUR"
-                },
-                "shipTo": {
-                    "name": values[1],
-                    "address": values[2],
-                    "ZIP": values[3],
-                    "region": values[4],
-                    "country": values[5]
-                },
-                "customerInfo": {
-                    "firstName": values[6],
-                    "lastName": values[7],
-                    "address": values[8],
-                    "phone": values[9],
-                    "email": values[10]
-                }
-            };
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    alert("Order was successfully added");
-                    resolve();
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(JSON.stringify(newOrder));
-        });
-    };
-
-    /**
-     * Post new shipping data to server.
-     * 
-     * @param {Object} order object of order.
-     *
-     * @param {String[]} values array of received from form values.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR posts loaded/failed
-     *
-     * @public
-     */
-    this.postOrderShip = function(order, values) {
-
-        return new Promise(function(resolve, reject) {
-            var req = new XMLHttpRequest();
-
-            req.open("POST", "http://localhost:3000/api/Orders/" + order.id + "/replace");
-
-            req.setRequestHeader("Content-Type", "application/json");
-
-            order.shipTo.name = values[0];
-            order.shipTo.address = values[1];
-            order.shipTo.ZIP = values[2];
-            order.shipTo.region = values[3];
-            order.shipTo.country = values[4];
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    resolve(order.id);
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-            req.send(JSON.stringify(order));
-        });
-    };
-
-    /**
-     * Post new customer data to server.
-     * 
-     * @param {Object} order object of order.
-     *
-     * @param {String[]} values array of received from form values.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR posts loaded/failed
-     *
-     * @public
-     */
-    this.postOrderCustomer = function(order, values) {
-
-        return new Promise(function(resolve, reject) {
-
-            var req = new XMLHttpRequest();
-
-            req.open("POST", "http://localhost:3000/api/Orders/" + order.id + "/replace");
-
-            req.setRequestHeader("Content-Type", "application/json");
-
-            order.customerInfo.firstName = values[0];
-            order.customerInfo.lastName = values[1];
-            order.customerInfo.address = values[2];
-            order.customerInfo.phone = values[3];
-            order.customerInfo.email = values[4];
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    resolve(order.id);
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(JSON.stringify(order));
-        });
-    };
-
-    /**
-     * Post new product to server.
-     * 
-     * @param {Number} id the order id.
-     *
-     * @param {String[]} values array of received from form values.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR posts loaded/failed
-     *
-     * @public
-     */
-    this.postProduct = function(id, values) {
-
-        return new Promise(function(resolve, reject) {
-
-            var req = new XMLHttpRequest();
-
-            req.open("POST", "http://localhost:3000/api/OrderProducts");
-
-            req.setRequestHeader("Content-Type", "application/json");
-
-            var newProduct = {
-                "name": values[0],
-                "price": Number.parseFloat(values[1]),
-                "currency": values[2].toUpperCase(), //check if letters > 3 return
-                "quantity": Number.parseInt(values[3]),
-                "totalPrice": Number.parseFloat(values[1]) * Number.parseInt(values[3]),
-                "orderId": Number.parseInt(id)
-            };
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    alert("Product was successfully added");
-                    var response = JSON.parse(req.responseText);
-                    resolve(id);
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(JSON.stringify(newProduct));
-        });
-    };
-
-    /**
-     * Delete order from server.
-     * 
-     * @param {Number} id the order id.
-     *
-     * @returns {Promise} the promise object will be resolved once XHR deletes loaded/failed
-     *
-     * @public
-     */
-    this.deleteOrder = function(id) {
-        return new Promise(function(resolve, reject) {
-            if (!id) {
-                alert("Choose order");
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-
-            req.open("DELETE", "http://localhost:3000/api/Orders/" + id);
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    alert("Order was successful deleted");
-                    resolve();
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(null);
-        });
-    };
-
-    /**
-     * Delete product from server.
-     * 
-     * @param {Number} productId the product id.
-     * 
-     * @param {Number} orderId the order id.
-     * 
-     * @returns {Promise} the promise object will be resolved once XHR deletes loaded/failed
-     *
-     * @public
-     */
-    this.deleteProduct = function(productId, orderId) {
-
-        return new Promise(function(resolve, reject) {
-            if (!productId) {
-                alert("Error");
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-
-            req.open("DELETE", "http://localhost:3000/api/OrderProducts/" + productId);
-
-            req.addEventListener("load", function() {
-                if (req.status < 400) {
-                    alert("Product was successfully deleted");
-                    resolve(orderId);
-                } else {
-                    reject(new Error("Request failed: " + req.statusText));
-                }
-            });
-
-            req.addEventListener("error", function() {
-                reject(new Error("Network error "));
-            });
-
-            req.send(null);
-        });
-    };
-}
-
-/**
  * View class. Knows everything about dom & manipulation and a little bit about data structure, which should be
  * filled into UI element.
  *
@@ -342,11 +26,14 @@ function View() {
         target;
 
     var iconSearchList = document.getElementsByClassName("fa-search")[0],
+        iconUpdateList = document.getElementsByClassName("fa-sync")[0],
         inputSearchList = document.getElementById("input-search-list"),
         iconSearchTable = document.getElementsByClassName("fa-search")[1],
         inputSearchTable = document.getElementById("input-search-table");
 
-    var searchProducts;
+    var searchProducts,
+        originalShipInfo = [],
+        originalCustomerInfo = [];
 
     var addOrderIcon = document.getElementById("add-order"),
         deleteOrderIcon = document.getElementById("delete-order"),
@@ -491,16 +178,21 @@ function View() {
             editShip.addEventListener("click", function() {
                 editShip.classList.toggle("active-edit");
                 if (editShip.className === "active-edit") {
+
                     Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[readonly]"), function(input) {
+                        originalShipInfo.push(input.value);
                         input.removeAttribute("readonly");
                         input.classList.add("active");
                     });
                     editShip.value = "Cancel";
                 }
                 if (editShip.className === "") {
+                    k = 0;
                     Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[type=text], input[type=tel], input[type=email]"), function(input) {
+                        input.value = originalShipInfo[k];
                         input.setAttribute("readonly", "readonly");
                         input.classList.remove("active");
+                        k++;
                     });
                     editShip.value = "Edit";
                 }
@@ -529,6 +221,8 @@ function View() {
         this.fillWithDataSecondSection(order, numberOfCommand);
 
         this.deleteSorts();
+
+        inputSearchTable.value = "";
 
         // Make all visible
         orderInfo.classList.remove("hidden");
@@ -649,15 +343,19 @@ function View() {
                     editShip.classList.toggle("active-edit");
                     if (editShip.className === "active-edit") {
                         Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[readonly]"), function(input) {
+                            originalShipInfo.push(input.value);
                             input.removeAttribute("readonly");
                             input.classList.add("active");
                         });
                         editShip.value = "Cancel";
                     }
                     if (editShip.className === "") {
+                        k = 0;
                         Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[type=text], input[type=tel], input[type=email]"), function(input) {
+                            input.value = originalShipInfo[k];
                             input.setAttribute("readonly", "readonly");
                             input.classList.remove("active");
+                            k++;
                         });
                         editShip.value = "Edit";
                     }
@@ -692,15 +390,19 @@ function View() {
                     editCustomer.classList.toggle("active-edit");
                     if (editCustomer.className === "active-edit") {
                         Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[readonly]"), function(input) {
+                            originalCustomerInfo.push(input.value);
                             input.removeAttribute("readonly");
                             input.classList.add("active");
                         });
                         editCustomer.value = "Cancel";
                     }
                     if (editCustomer.className === "") {
+                        k = 0;
                         Array.prototype.forEach.call(orderChosenInfo.querySelectorAll("input[type=text], input[type=tel], input[type=email]"), function(input) {
+                            input.value = originalCustomerInfo[k];
                             input.setAttribute("readonly", "readonly");
                             input.classList.remove("active");
+                            k++;
                         });
                         editCustomer.value = "Edit";
                     }
@@ -1000,8 +702,8 @@ function View() {
         geocoder = new google.maps.Geocoder();
         var latlng = new google.maps.LatLng(-34.397, 150.644);
         var myOptions = {
-            zoom: 2,
-            minZoom: 2,
+            zoom: 14,
+            minZoom: 4,
             center: latlng,
             gestureHandling: 'greedy',
             styles: [{
@@ -1079,10 +781,10 @@ function View() {
                             infowindow.open(map, marker);
                         });
                     } else {
-                        alert("No results found");
+                        alert("There is no such address");
                     }
                 } else {
-                    alert("No results found");
+                    alert("There is no such address");
                     console.log("Geocode was not successful for the following reason: " + status);
                 }
             });
@@ -1170,6 +872,25 @@ function View() {
      */
     this.getIconSearchList = function() {
         return iconSearchList;
+    };
+
+    /**
+     * Returns the iconUpdateList element.
+     *
+     * @returns {HTMLIconElement} the icon element.
+     */
+    this.getIconUpdateList = function() {
+        return iconUpdateList;
+    };
+
+    /**
+     * Toggles class of the update icon.
+     * 
+     * @return {View} self object.
+     */
+    this.toggleUpdateIcon = function() {
+        iconUpdateList.classList.toggle("fa-spin");
+        return this;
     };
 
     /**
@@ -1340,20 +1061,20 @@ function View() {
         background.innerHTML = `<div id="cancel-form"><i class="fas fa-times"></i></div>
                                 <form action="" id="add-order-form">
                                     <h2>Add order</h2>
-                                    <label data-req><input type="text" placeholder="Customer" required id="input-customer"></label>
+                                    <label data-req>Customer:<input type="text" placeholder="Customer" required id="input-customer"></label>
 
                                     <h3>Shipping Address</h3>
-                                    <label><input type="text" placeholder="Name" id="input-name-ship"></label>
-                                    <label><input type="text" placeholder="Address" id="input-address-ship"></label>
-                                    <label><input type="text" placeholder="ZIP" id="input-zip-ship"></label>
-                                    <label><input type="text" placeholder="Region" id="input-region-ship"></label>
-                                    <label><input type="text" placeholder="Country" id="input-country-ship"></label>
+                                    <label>Name:<input type="text" placeholder="Name" id="input-name-ship"></label>
+                                    <label>Address:<input type="text" placeholder="Address" id="input-address-ship"></label>
+                                    <label>ZIP:<input type="text" placeholder="ZIP" id="input-zip-ship"></label>
+                                    <label>Region:<input type="text" placeholder="Region" id="input-region-ship"></label>
+                                    <label>Country:<input type="text" placeholder="Country" id="input-country-ship"></label>
                                     <h3>Customer Information</h3>
-                                    <label><input type="text" placeholder="First name" id="input-first-name-customer"></label>
-                                    <label><input type="text" placeholder="Last name" id="input-last-name-customer"></label>
-                                    <label><input type="text" placeholder="Address" id="input-address-customer"></label>
-                                    <label><input type="tel" placeholder="Phone number" id="input-phone-customer"></label>
-                                    <label><input type="email" placeholder="Email" id="input-email-customer"></label>
+                                    <label>First name:<input type="text" placeholder="First name" id="input-first-name-customer"></label>
+                                    <label>Last name:<input type="text" placeholder="Last name" id="input-last-name-customer"></label>
+                                    <label>Address:<input type="text" placeholder="Address" id="input-address-customer"></label>
+                                    <label>Phone number:<input type="tel" placeholder="Phone number" id="input-phone-customer"></label>
+                                    <label>Email:<input type="email" placeholder="Email" id="input-email-customer"></label>
                                     <input type="submit" value="Add order" id="add-order-submit">
                                 </form>`;
         document.body.insertBefore(background, document.body.firstChild);
@@ -1368,7 +1089,15 @@ function View() {
     this.showAddProductForm = function() {
         var background = orderDivTemplate.cloneNode(true);
         background.className = "background-dialog";
-        background.innerHTML = "<div id=\"cancel-form\"><i class=\"fas fa-times\"></i></div>\n                            <form action=\"\" id=\"add-product-form\">\n                                <h2>Add product</h2>\n                                <label data-req><input type=\"text\" placeholder=\"Name\" required id=\"input-name-product\"></label>\n                                <label data-req><input type=\"number\" placeholder=\"Price\" required id=\"input-price-product\"></label>\n                                <label data-req><input type=\"text\" placeholder=\"Currency\" required id=\"input-currency-product\"></label>\n                                <label data-req><input type=\"number\" placeholder=\"Quantity\" required id=\"input-quantity-product\"></label>\n                                <input type=\"submit\" value=\"Add product\" id=\"add-product-submit\">\n                            </form>";
+        background.innerHTML = `<div id="cancel-form"><i class="fas fa-times"></i></div>
+                            <form action="" id="add-product-form">
+                                <h2>Add product</h2>
+                                <label data-req>Name:<input type="text" required id="input-name-product"></label>
+                                <label data-req>Price:<input type="number" required id="input-price-product"></label>
+                                <label data-req>Currency:<input type="text" required id="input-currency-product"></label>
+                                <label data-req>Quantity:<input type="number" required id="input-quantity-product"></label>
+                                <input type="submit" value="Add product" id="add-product-submit">
+                            </form>`;
         document.body.insertBefore(background, document.body.firstChild);
         return background;
     };
@@ -1422,7 +1151,7 @@ function View() {
      * 
      * @return {String[]} array of received from form values.
      */
-    this.postOrderShipValues = function() {
+    this.updateOrderShipValues = function() {
         var arrayOfValues = [];
 
         var nameShipLocalValue = document.getElementById("input-name-ship-local").value,
@@ -1432,6 +1161,8 @@ function View() {
             countryShipLocalValue = document.getElementById("input-country-ship-local").value;
 
         arrayOfValues.push(nameShipLocalValue, addressShipLocalValue, zipShipLocalValue, regionShipLocalValue, countryShipLocalValue);
+        originalShipInfo = [];
+        originalShipInfo.push(nameShipLocalValue, addressShipLocalValue, zipShipLocalValue, regionShipLocalValue, countryShipLocalValue);
 
         return arrayOfValues;
     };
@@ -1441,7 +1172,7 @@ function View() {
      * 
      * @return {String[]} array of received from form values.
      */
-    this.postOrderCustomerValues = function() {
+    this.updateOrderCustomerValues = function() {
         var arrayOfValues = [];
 
         var firstNameCustomerLocalValue = document.getElementById("input-first-customer-local").value,
@@ -1451,6 +1182,8 @@ function View() {
             emailCustomerLocalValue = document.getElementById("input-email-customer-local").value;
 
         arrayOfValues.push(firstNameCustomerLocalValue, lastNameCustomerLocalValue, addressCustomerLocalValue, phoneCustomerLocalValue, emailCustomerLocalValue);
+        originalCustomerInfo = [];
+        originalCustomerInfo.push(firstNameCustomerLocalValue, lastNameCustomerLocalValue, addressCustomerLocalValue, phoneCustomerLocalValue, emailCustomerLocalValue);
 
         return arrayOfValues;
     };
@@ -1514,316 +1247,3 @@ function View() {
         return null;
     };
 }
-
-/**
- * Controller class. Orchestrates the model and view objects. A "glue" between them.
- *
- * @param {View} view view instance.
- * @param {Model} model model instance.
- *
- * @constructor
- */
-function Controller(view, model) {
-
-    /**
-     * Initialize controller.
-     *
-     * @public
-     */
-    this.init = function() {
-
-        view.createOrderListTemplate();
-
-        model.getData().then(function(orders) {
-            view.createOrdersList(orders);
-        });
-
-        var ordersList = view.getOrdersList(),
-            addOrderIcon = view.getAddOrderIcon(),
-            deleteOrderIcon = view.getDeleteOrderIcon(),
-            addProductIcon = view.getAddProductIcon(),
-            itemsTable = view.getItemsTable(),
-            itemsTableHeader = view.getItemsTableHeader(),
-            orderChosenInfo = view.getOrderChosenInfo(),
-            chooseAdditionOrderInfo = view.getChooseAdditionOrderInfo(),
-            iconSearchList = view.getIconSearchList(),
-            iconSearchTable = view.getIconSearchTable();
-
-        var orderId, chosenAdditionOrderInfo;
-
-        ordersList.addEventListener("click", this._onOrderFromListClick);
-        addOrderIcon.addEventListener("click", this._onAddOrderIconClick);
-        deleteOrderIcon.addEventListener("click", this._onDeleteOrderIconClick);
-        addProductIcon.addEventListener("click", this._onAddProductIconClick);
-        itemsTable.addEventListener("click", this._onDeleteProductIconClick);
-        itemsTableHeader.addEventListener("click", this._onSortProductIconClick);
-        orderChosenInfo.addEventListener("submit", this._onSaveAdditionalInfoClick);
-        chooseAdditionOrderInfo.addEventListener("click", this._onChangeAdditionOrderInfoClick);
-        iconSearchList.addEventListener("click", this._onSearchListIconClick);
-        iconSearchTable.addEventListener("click", this._onSearchTableIconClick);
-    };
-
-    /**
-     * Order from list click event handler.
-     *
-     * @listens click
-     *
-     * @param {Event} event the DOM event object.
-     *
-     * @private
-     */
-    this._onOrderFromListClick = function(event) {
-        var orderLi = view.findClickedOrder(event);
-        if (orderLi) {
-            var id = Number.parseInt(view.getAttr(orderLi, "data-order-id")),
-                orderId = view.getOrderId();
-            view.addClass(orderLi, "chosen-order");
-
-            //checking if we already watching clicked order
-            if (id === orderId) {
-                return;
-            }
-
-            view.removeClsFromSiblings(orderLi);
-
-            model.getData(id).then(function(order) {
-                view.fillWithDataOrderTemplate(order);
-                return model.getData(id, true);
-            }).then(function(products) {
-                view.fillTable(products);
-            });
-        }
-    };
-
-    /**
-     * Add order icon click event handler.
-     *
-     * @listens click
-     *
-     * @private
-     */
-    this._onAddOrderIconClick = function() {
-        var background = view.showAddOrderForm();
-
-        background.addEventListener("click", function(event) {
-            target = event.target || event.srcElement;
-            view.closeBackground(target, background);
-        });
-
-        var addOrderForm = view.getAddOrderForm();
-
-        addOrderForm.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            var arrayOfValues = view.getAddOrderFormValues();
-
-            model.postOrder(arrayOfValues).then(function() {
-                return model.getData();
-            }).then(function(orders) {
-                view.createOrdersList(orders);
-            });
-        });
-    };
-
-    /**
-     * Delete order icon click event handler.
-     *
-     * @listens click
-     *
-     * @private
-     */
-    this._onDeleteOrderIconClick = function() {
-        id = view.getOrderId();
-        model.deleteOrder(id).then(function() {
-            view.backToOrders();
-            return model.getData();
-        }).then(function(orders) {
-            view.createOrdersList(orders);
-        });
-    };
-
-    /**
-     * Add product icon click event handler.
-     *
-     * @listens click
-     *
-     * @private
-     */
-    this._onAddProductIconClick = function() {
-        var id = view.getOrderId(),
-            background = view.showAddProductForm();
-
-        background.addEventListener("click", function(event) {
-            target = event.target || event.srcElement;
-            view.closeBackground(target, background);
-        });
-
-        var addProductForm = view.getAddProductForm();
-
-        addProductForm.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            var arrayOfValues = view.getAddProductFormValues();
-
-            model.postProduct(id, arrayOfValues).then(function(id) {
-                return model.getData(id, true);
-            }).then(function(products) {
-                view.fillTable(products);
-            });
-
-            view.deleteSorts();
-        });
-    };
-
-    /**
-     * Delete product icon click event handler.
-     *
-     * @listens click
-     * 
-     * @param {Event} event the DOM event object.
-     *
-     * @private
-     */
-    this._onDeleteProductIconClick = function(event) {
-        target = event.target || event.srcElement, trashSection = target.matches(".item-trash") ? target : target.closest(".item-trash");
-        if (trashSection) {
-            var productId = view.getAttr(trashSection.firstChild, "data-product-id"),
-                orderId = view.getOrderId(),
-                iconSort = view.isHaveSort();
-
-            model.deleteProduct(productId, orderId).then(function(id) {
-                return model.getData(id, true);
-            }).then(function(products) {
-                if (iconSort) {
-                    return view.sortItemsTable(products, iconSort);
-                } else {
-                    return view.fillTable(products);
-                }
-            });
-        }
-    };
-
-    /**
-     * Save shipping or customer info button click event handler.
-     *
-     * @listens click
-     * 
-     * @param {Event} event the DOM event object.
-     *
-     * @private
-     */
-    this._onSaveAdditionalInfoClick = function(event) {
-        event.preventDefault();
-
-        chosenAdditionOrderInfo = view.getAdditionalInfoId();
-        id = view.getOrderId();
-
-        if (chosenAdditionOrderInfo === 1) {
-            var values = view.postOrderShipValues();
-            model.getData(id).then(function(order) {
-                return model.postOrderShip(order, values);
-            }).then(function(id) {
-                return model.getData(id);
-            }).then(function(order) {
-                view.fillWithDataOrderTemplate(order, chosenAdditionOrderInfo);
-            });
-        };
-        if (chosenAdditionOrderInfo === 3) {
-            var values = view.postOrderCustomerValues();
-            model.getData(id).then(function(order) {
-                return model.postOrderCustomer(order, values);
-            }).then(function(id) {
-                return model.getData(id);
-            }).then(function(order) {
-                view.fillWithDataOrderTemplate(order, chosenAdditionOrderInfo);
-            });
-        };
-    };
-
-    /**
-     * Switch addition order info icon click event handler.
-     *
-     * @listens click
-     * 
-     * @param {Event} event the DOM event object.
-     *
-     * @private
-     */
-    this._onChangeAdditionOrderInfoClick = function(event) {
-        target = event.target || event.srcElement,
-            iconChoice = target.matches(".icon-choice") ? target : target.closest(".icon-choice");
-        if (iconChoice) {
-            id = view.getOrderId();
-            var numberOfCommand = view.getAdditionalInfoId(iconChoice),
-                currentCommand = view.getAdditionalInfoId();
-
-            if (numberOfCommand === currentCommand) {
-                return;
-            }
-
-            view.deleteChosenClassFromTabs();
-
-            model.getData(id).then(function(order) {
-                view.switchTab(order, numberOfCommand);
-            });
-        }
-    };
-
-    /**
-     * Sort product icon click event handler.
-     *
-     * @listens click
-     * 
-     * @param {Event} event the DOM event object.
-     *
-     * @private
-     */
-    this._onSortProductIconClick = function(event) {
-        target = event.target || event.srcElement, iconSort = target.matches("I") ? target : target.closest("I");
-        if (iconSort) {
-
-            view.deleteOthersSorts(iconSort);
-
-            var sortState = Number.parseInt(view.getAttr(iconSort, "data-state"));
-
-            view.changeSortState(sortState);
-
-            var id = view.getOrderId();
-
-            model.getData(id, true).then(function(products) {
-                view.sortItemsTable(products, iconSort);
-            });
-        }
-    };
-
-    /**
-     * Search orders icon click event handler.
-     *
-     * @listens click
-     *
-     * @private
-     */
-    this._onSearchListIconClick = function() {
-        model.getData().then(function(orders) {
-            view.searchList(orders);
-        });
-    };
-
-    /**
-     * Search products icon click event handler.
-     *
-     * @listens click
-     *
-     * @private
-     */
-    this._onSearchTableIconClick = function() {
-        orderId = view.getOrderId();
-        model.getData(orderId, true).then(function(products) {
-            view.searchTable(products);
-        });
-    };
-}
-
-new Controller(new View(), new Model()).init();

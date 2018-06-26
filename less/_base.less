@@ -97,20 +97,20 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
     position: absolute;
     left: 50%;
     top: 50%;
-    padding: 20px 80px;
-    max-height: 100vh;
-    min-height: 100vh;
-    box-sizing: border-box;
     transform: translate(-50%, -50%);
-    background-color: #2e2399;
-    
+    padding: 40px 80px;
+    max-height: 80vh;
+    min-height: 80vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: #645da7;
     h2 {
         font-size: 1.5rem;
         color: white;
+        margin-top: 5px;
     }
     h3 {
         font-size: 1rem;
@@ -121,6 +121,8 @@ a {
         position: relative;
         width: 250px;
         color: white;
+        padding-bottom: 25px;
+        box-sizing: border-box;
         input {
             width: 100%;
             padding: 2px 4px;
@@ -131,12 +133,26 @@ a {
             content: '*';
             position: absolute;
             left: -20px;
-            color: white;
+            color: red;
             font-size: 1rem;
         }
     }
-    #add-order-submit, #add-product-submit {
-        padding: 4px 10px;
+    #add-order-submit {
+        padding-top:10px;
+        padding-bottom: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border: none;
         font-family: 'Open Sans', sans-serif;
+        margin-top: 20px;
+    }
+}
+#add-product-form {
+    justify-content: space-around;
+    #add-product-submit {
+        padding: 10px 20px;
+        border: none;
+        font-family: 'Open Sans', sans-serif;
+        margin-top: 10px;
     }
 }

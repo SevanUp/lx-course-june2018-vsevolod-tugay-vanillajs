@@ -105,21 +105,22 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   position: absolute;
   left: 50%;
   top: 50%;
-  padding: 20px 80px;
-  max-height: 100vh;
-  min-height: 100vh;
-  box-sizing: border-box;
   transform: translate(-50%, -50%);
-  background-color: #2e2399;
+  padding: 40px 80px;
+  max-height: 80vh;
+  min-height: 80vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: #645da7;
 }
 #add-order-form h2,
 #add-product-form h2 {
   font-size: 1.5rem;
   color: white;
+  margin-top: 5px;
 }
 #add-order-form h3,
 #add-product-form h3 {
@@ -132,6 +133,8 @@ a {
   position: relative;
   width: 250px;
   color: white;
+  padding-bottom: 25px;
+  box-sizing: border-box;
 }
 #add-order-form label input,
 #add-product-form label input {
@@ -145,15 +148,27 @@ a {
   content: '*';
   position: absolute;
   left: -20px;
-  color: white;
+  color: red;
   font-size: 1rem;
 }
 #add-order-form #add-order-submit,
-#add-product-form #add-order-submit,
-#add-order-form #add-product-submit,
-#add-product-form #add-product-submit {
-  padding: 4px 10px;
+#add-product-form #add-order-submit {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
   font-family: 'Open Sans', sans-serif;
+  margin-top: 20px;
+}
+#add-product-form {
+  justify-content: space-around;
+}
+#add-product-form #add-product-submit {
+  padding: 10px 20px;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 10px;
 }
 .order-full-info {
   width: calc(100% - 300px);
@@ -292,6 +307,9 @@ a {
   left: 10px;
   width: calc(100% - 20px);
   height: calc(100% - 50px);
+}
+.order-full-info #order-chosen-info[data-info="2"] {
+  height: 300px;
 }
 .order-full-info .order-items {
   width: 100%;
